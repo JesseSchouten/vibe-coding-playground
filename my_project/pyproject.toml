@@ -2,7 +2,7 @@
 name = "my_project"
 version = "0.0.1"
 authors = [{ name = "jesse.schouten@outlook.com" }]
-requires-python = ">=3.10,<=3.13"
+requires-python = ">=3.12,<=3.13"
 
 [dependency-groups]
 dev = [
@@ -13,11 +13,9 @@ dev = [
     # Note that for local development, you should use a version that is not newer
     # than the remote cluster or serverless compute you connect to.
     # See also https://docs.databricks.com/dev-tools/databricks-connect.html.
-    "databricks-connect>=15.4,<15.5",
+    "databricks-connect==17.3.0",
     # Databricks SDK for runtime type hints (dbutils, spark, etc.)
-    "databricks-sdk",
-    # PySpark stubs for type checking
-    "pyspark-stubs",
+    "databricks-sdk>=0.67.0",
 ]
 
 [tool.pytest.ini_options]

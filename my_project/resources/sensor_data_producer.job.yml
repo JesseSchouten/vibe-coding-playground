@@ -1,0 +1,62 @@
+resources:
+  jobs:
+    sensor_data_producer_job:
+      name: sensor_data_producer_job
+      
+      # Job description
+      description: "Generates synthetic sensor event data and writes it to a Databricks volume landing zone"
+      
+      # Job parameters that can be overridden at runtime
+      parameters:
+        - name: volume_path
+          default: "/Volumes/catalog/schema/volume/landing_zone"
+        - name: num_datapoints
+          default: "100"
+        - name: filename_prefix
+          default: "sensor_data"
+      
+      # Job tasks
+      tasks:
+        - task_key: generate_sensor_data
+          
+          # Notebook configuration
+          notebook_task:
+            notebook_path: ../notebooks/sensor_data_producer.py
+            base_parameters:
+              volume_path: "{{job.parameters.volume_path}}"
+              num_datapoints: "{{job.parameters.num_datapoints}}"
+              filename_prefix: "{{job.parameters.filename_prefix}}"
+          
+          # Compute configuration
+          new_cluster:
+            spark_version: "15.4.x-scala2.12"
+            node_type_id: "i3.xlarge"
+            num_workers: 1
+            data_security_mode: SINGLE_USER
+            custom_tags:
+              project: "my_project"
+              job_type: "data_generator"
+              environment: ${bundle.target}
+          
+          # Libraries - include the wheel artifact
+          libraries:
+            - whl: "${workspace.root_path}/files/artifacts/.internal/python_artifact.whl"
+          
+          # Task timeout (10 minutes)
+          timeout_seconds: 600
+          
+          # Retry configuration
+          max_retries: 2
+          min_retry_interval_millis: 30000
+          retry_on_timeout: false
+      
+      # Overall job timeout (15 minutes)
+      timeout_seconds: 900
+      max_concurrent_runs: 1
+      
+      # Email notifications (optional - uncomment to enable)
+      # email_notifications:
+      #   on_success:
+      #     - ${workspace.current_user.userName}
+      #   on_failure:
+      #     - ${workspace.current_user.userName}
