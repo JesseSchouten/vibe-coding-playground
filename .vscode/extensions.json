@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "sst-dev.opencode",
+        "ms-python.black-formatter",
+        "njpwerner.autodocstring",
+        "databricks.databricks",
+        "ms-python.vscode-pylance",
+        "ClemensPeters.format-json",
+        "charliermarsh.ruff",
+        "redhat.vscode-yaml"
+    ]
+}
