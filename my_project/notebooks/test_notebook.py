@@ -16,10 +16,11 @@
 
 # COMMAND ----------
 
-from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, lit
 import sys
 
+from pyspark.sql.functions import col
+
+dbutils.widgets.removeAll()
 print(f"Python version: {sys.version}")
 print(f"Spark version: {spark.version}")
 
@@ -36,7 +37,7 @@ data = [
     ("Bob", 45, "Sales"),
     ("Charlie", 28, "Engineering"),
     ("Diana", 32, "Marketing"),
-    ("Eve", 29, "Engineering")
+    ("Eve", 29, "Engineering"),
 ]
 
 columns = ["name", "age", "department"]

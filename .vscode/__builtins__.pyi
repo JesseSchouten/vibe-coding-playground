@@ -1,0 +1,8 @@
+# Typings for Pylance in Visual Studio Code
+# see https://github.com/microsoft/pyright/blob/main/docs/builtins.md
+from databricks.sdk.runtime import *  # type: ignore
+from pyspark.sql import SparkSession  # type: ignore
+from pyspark.dbutils import DBUtils  # type: ignore
+
+spark: SparkSession
+dbutils: DBUtils

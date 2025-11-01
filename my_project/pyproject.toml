@@ -7,15 +7,17 @@ requires-python = ">=3.10,<=3.13"
 [dependency-groups]
 dev = [
     "pytest",
-
     # Code completion support for Lakeflow Declarative Pipelines, also install databricks-connect
     "databricks-dlt",
-
     # databricks-connect can be used to run parts of this project locally.
     # Note that for local development, you should use a version that is not newer
     # than the remote cluster or serverless compute you connect to.
     # See also https://docs.databricks.com/dev-tools/databricks-connect.html.
     "databricks-connect>=15.4,<15.5",
+    # Databricks SDK for runtime type hints (dbutils, spark, etc.)
+    "databricks-sdk",
+    # PySpark stubs for type checking
+    "pyspark-stubs",
 ]
 
 [tool.pytest.ini_options]
@@ -33,3 +35,18 @@ packages = ["src/my_project"]
 
 [project.scripts]
 main = "my_project.main:main"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+extend-include = ["*.ipynb"]
+extend-exclude = ["scratch"]
+builtins = ["dbutils", "display", "spark"]
+
+[tool.ruff.lint]
+extend-select = ["F"]
+
+[tool.ruff.lint.per-file-ignores]
+"*.py" = []
+
+
