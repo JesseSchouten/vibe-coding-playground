@@ -7,13 +7,14 @@ requires-python = ">=3.12,<=3.13"
 [dependency-groups]
 dev = [
     "pytest",
+    "pytest-cov",
     # Code completion support for Lakeflow Declarative Pipelines, also install databricks-connect
     "databricks-dlt",
     # databricks-connect can be used to run parts of this project locally.
     # Note that for local development, you should use a version that is not newer
     # than the remote cluster or serverless compute you connect to.
     # See also https://docs.databricks.com/dev-tools/databricks-connect.html.
-    "databricks-connect==17.3.0",
+    "databricks-connect==17.2.*",
     # Databricks SDK for runtime type hints (dbutils, spark, etc.)
     "databricks-sdk>=0.67.0",
 ]

@@ -40,10 +40,10 @@ clean: ## Clean cache, build artifacts, and temporary files
 	rm -rf htmlcov/
 	@echo "$(GREEN)Clean complete!$(NC)"
 
-test: ## Run unit tests with pytest
-	@echo "$(BLUE)Running unit tests...$(NC)"
-	uv run pytest tests/ -v
-	@echo "$(GREEN)Tests complete!$(NC)"
+test: ## Run unit tests with pytest and coverage
+	@echo "$(BLUE)Running unit tests with coverage...$(NC)"
+	uv run pytest tests/ -v --cov=src/my_project --cov-report=html --cov-report=term-missing
+	@echo "$(GREEN)Tests complete! Coverage report in htmlcov/$(NC)"
 
 test-coverage: ## Run tests with coverage report
 	@echo "$(BLUE)Running tests with coverage...$(NC)"
