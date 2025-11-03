@@ -7,7 +7,7 @@
             "url": "https://mcp.context7.com/mcp",
             "enabled": true,
             "headers": {
-                "Authorization": "Bearer ctx7sk-ad07ea34-d6b1-47f8-a085-02183a4c6e59"
+                "Authorization": "Bearer {env:CONTEXT7_BEARER}"
             }
         }
     }
